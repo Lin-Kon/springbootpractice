@@ -46,7 +46,7 @@ public class MovieController {
             movieMap.put(movie.getId(),movie);
             return ResponseEntity.status(HttpStatus.CREATED).body(movie);
         } catch(Exception e){
-            e.printStackTrace();
+//            e.printStackTrace();
             return ResponseEntity.badRequest().body(null);
         }
     }
