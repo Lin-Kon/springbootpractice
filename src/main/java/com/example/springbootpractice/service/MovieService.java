@@ -34,12 +34,12 @@ public class MovieService {
         } else throw new ResourceDoesNotExistException(id + "");
     }
 
-    public Movie findByTitle(String title) throws ResourceDoesNotExistException {
-        Optional<Movie> optionalMovie = movieRepository.findByTitle(title);
-        if(optionalMovie.isPresent()){
-            return optionalMovie.get();
-        } else throw new ResourceDoesNotExistException(title);
-    }
+//    public Movie findByTitle(String title) throws ResourceDoesNotExistException {
+//        Optional<Movie> optionalMovie = movieRepository.findByName();
+//        if(optionalMovie.isPresent()){
+//            return optionalMovie.get();
+//        } else throw new ResourceDoesNotExistException(title);
+//    }
 
     public List<Movie> findAll() {
         List<Movie> movieList = new ArrayList<>();

@@ -41,18 +41,18 @@ public class MovieController {
         }
     }
 
-    @GetMapping("titles/{title}")
-    public ResponseEntity<Movie> getMovieTitle(@PathVariable String title){
-        try{
-            Movie movie = movieService.findByTitle(title);
-            return ResponseEntity.ok(movie);
-        } catch(ResourceDoesNotExistException e) {
-            return ResponseEntity.notFound().build();
-        } catch(Exception e) {
-            return ResponseEntity.badRequest().build();
-        }
-
-    }
+//    @GetMapping("titles/{title}")
+//    public ResponseEntity<Movie> getMovieTitle(@PathVariable String title){
+//        try{
+//            Movie movie = movieService.findByTitle(title);
+//            return ResponseEntity.ok(movie);
+//        } catch(ResourceDoesNotExistException e) {
+//            return ResponseEntity.notFound().build();
+//        } catch(Exception e) {
+//            return ResponseEntity.badRequest().build();
+//        }
+//
+//    }
 
     @GetMapping("")
     public ResponseEntity<List<Movie>> getMovies(){

@@ -1,9 +1,7 @@
 package com.example.springbootpractice.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import com.sun.org.glassfish.gmbal.ParameterNames;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

@@ -11,5 +11,5 @@ import java.util.Optional;
 public interface MovieRepository extends CrudRepository<Movie, Long> {
 List<Movie> findAllByTitle(String title);
 List<Movie> findAllByTitleContaining(String partialTitle);
-Optional<Movie> findByTitle(String title);
+Optional<Movie> findByName(String title);
 }
