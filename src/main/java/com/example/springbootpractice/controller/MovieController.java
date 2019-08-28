@@ -19,7 +19,7 @@ public class MovieController {
 
     public MovieController() {
         movieMap = new HashMap<>();
-        movieMap.put(1000l, new Movie(1000l, "The American Virgin"));
+//        movieMap.put(1000l, new Movie(1000l, "The American Virgin"));
     }
 
     @GetMapping("/{id}")
