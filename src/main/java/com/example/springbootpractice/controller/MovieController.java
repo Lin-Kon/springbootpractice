@@ -41,6 +41,19 @@ public class MovieController {
         }
     }
 
+    @GetMapping("titles/{title}")
+    public ResponseEntity<Movie> getMovieTitle(@PathVariable String title){
+        try{
+            Movie movie = movieService.findByTitle(title);
+            return ResponseEntity.ok(movie);
+        } catch(ResourceDoesNotExistException e) {
+            return ResponseEntity.notFound().build();
+        } catch(Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+
+    }
+
     @GetMapping("")
     public ResponseEntity<List<Movie>> getMovies(){
 //        List<Movie> movieList = movieMap.values().stream().collect(Collectors.toList());
@@ -53,10 +66,20 @@ public class MovieController {
     {
         try{
 //            movieMap.put(movie.getId(),movie);
-            Movie insertedMovie = movieService.insertedMovie(movie);
+            Movie insertedMovie = movieService.insertMovie(movie);
             return ResponseEntity.status(HttpStatus.CREATED).body(movie);
         } catch(ResourceAlreadyExistException e){
 //            e.printStackTrace();
+            return ResponseEntity.badRequest().body(null);
+        }
+    }
+
+    @PutMapping("")
+    public ResponseEntity<Movie> updateMovie(@RequestBody Movie movie){
+        try {
+            Movie updatedMovie = movieService.updateMovie(movie);
+            return ResponseEntity.status(HttpStatus.RESET_CONTENT).body(updatedMovie);
+        } catch(ResourceDoesNotExistException e){
             return ResponseEntity.badRequest().body(null);
         }
     }
@@ -68,7 +91,7 @@ public class MovieController {
 //                   throw new ResourceDoesNotExistException(id + "");
 //                movieMap.remove(id);
 //                boolean deleted = true;
-            boolean deleted = movieService.deletedById(id);
+            boolean deleted = movieService.deleteById(id);
             return ResponseEntity.ok(id);
         } catch (ResourceDoesNotExistException e){
 //            e.printStackTrace();

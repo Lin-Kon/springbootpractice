@@ -18,20 +18,7 @@ public class MovieService {
         this.movieRepository= movieRepository;
     }
 
-    public Movie findById(long id) throws ResourceDoesNotExistException {
-        Optional<Movie> optionalMovie = movieRepository.findById(id);
-        if(optionalMovie.isPresent()){
-            return optionalMovie.get();
-        } else throw new ResourceDoesNotExistException(id + "");
-    }
-
-    public List<Movie> findAll() {
-        List<Movie> movieList = new ArrayList<>();
-        movieRepository.findAll().forEach(movieList::add);
-        return movieList;
-    }
-
-    public Movie insertedMovie(Movie movie) throws ResourceAlreadyExistException {
+    public Movie insertMovie(Movie movie) throws ResourceAlreadyExistException {
         Optional<Movie> optionalMovie = movieRepository.findById(movie.getId());
         if(optionalMovie.isPresent()) {
             throw new ResourceAlreadyExistException(movie.getId()+"");
@@ -40,7 +27,36 @@ public class MovieService {
         }
     }
 
-    public boolean deletedById(long id) throws ResourceDoesNotExistException {
+    public Movie findById(long id) throws ResourceDoesNotExistException {
+        Optional<Movie> optionalMovie = movieRepository.findById(id);
+        if(optionalMovie.isPresent()){
+            return optionalMovie.get();
+        } else throw new ResourceDoesNotExistException(id + "");
+    }
+
+    public Movie findByTitle(String title) throws ResourceDoesNotExistException {
+        Optional<Movie> optionalMovie = movieRepository.findByTitle(title);
+        if(optionalMovie.isPresent()){
+            return optionalMovie.get();
+        } else throw new ResourceDoesNotExistException(title);
+    }
+
+    public List<Movie> findAll() {
+        List<Movie> movieList = new ArrayList<>();
+        movieRepository.findAll().forEach(movieList::add);
+        return movieList;
+    }
+
+    public Movie updateMovie(Movie movie) throws ResourceDoesNotExistException {
+        Optional<Movie> optionalMovie = movieRepository.findById(movie.getId());
+        if(optionalMovie.isPresent()) {
+            return movieRepository.save(movie);
+        } else {
+            throw new ResourceDoesNotExistException(movie.getId() + "");
+        }
+    }
+
+    public boolean deleteById(long id) throws ResourceDoesNotExistException {
         Optional<Movie> optionalMovie = movieRepository.findById(id);
         optionalMovie.ifPresent(movie -> movieRepository.deleteById(id));
         optionalMovie.orElseThrow(() -> new ResourceDoesNotExistException(id + ""));
